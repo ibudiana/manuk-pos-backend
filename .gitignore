@@ -1,0 +1,33 @@
+# Go binary files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go build artifacts
+bin/
+obj/
+
+# env file
+.env
+
+# Go test binary
+/test/
+
+# IDE specific files
+.idea/
+.vscode/
+*.iml
+
+# MacOS specific files
+.DS_Store
+
+# Log files
+*.log
+
+# Go module cache
+/pkg/
+
+# Go workspace cache
+.golangci-lint-cache/
