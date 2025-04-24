@@ -105,7 +105,7 @@ func UpdateUserByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "User update successfuly", User)
+	helpers.JSONResponse(c, http.StatusOK, "User update successfuly", User)
 }
 
 func DeleteUserByID(c *gin.Context) {

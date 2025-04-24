@@ -98,7 +98,7 @@ func UpdateCustomerByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "Customer update successfuly", Customer)
+	helpers.JSONResponse(c, http.StatusOK, "Customer update successfuly", Customer)
 }
 
 func DeleteCustomerByID(c *gin.Context) {

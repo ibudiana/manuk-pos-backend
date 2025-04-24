@@ -92,7 +92,7 @@ func UpdatePromotionByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "Promotion update successfuly", Promotion)
+	helpers.JSONResponse(c, http.StatusOK, "Promotion update successfuly", Promotion)
 }
 
 func DeletePromotionByID(c *gin.Context) {

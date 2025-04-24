@@ -98,7 +98,7 @@ func UpdateProductCategoryByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "ProductCategory update successfuly", ProductCategory)
+	helpers.JSONResponse(c, http.StatusOK, "ProductCategory update successfuly", ProductCategory)
 }
 
 func DeleteProductCategoryByID(c *gin.Context) {

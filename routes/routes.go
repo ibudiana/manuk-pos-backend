@@ -58,6 +58,17 @@ func SetupRouter() *gin.Engine {
 		{
 			orderRoutes.POST("", ordercontroller.CreateTransactionOrder)
 			orderRoutes.GET("", ordercontroller.GetTransactionOrders)
+
+			// Fee Routes
+			feeRoutes := orderRoutes.Group("/fees")
+			{
+				feeRoutes.POST("", ordercontroller.CreateFee)
+				feeRoutes.GET("", ordercontroller.GetFees)
+
+				feeRoutes.GET("/:id", ordercontroller.GetFeeByID)
+				feeRoutes.PATCH("/:id", ordercontroller.UpdateFeeByID)
+				feeRoutes.DELETE("/:id", ordercontroller.DeleteFeeByID)
+			}
 		}
 
 		// Customer Routes
@@ -93,6 +104,16 @@ func SetupRouter() *gin.Engine {
 			userRoutes.DELETE("/:id", controllers.DeleteUserByID)
 		}
 
+		// Role Routes
+		roleRoutes := apiRoutes.Group("/roles")
+		{
+			roleRoutes.POST("", controllers.CreateRole)
+			roleRoutes.GET("", controllers.GetRoles)
+			roleRoutes.GET("/:id", controllers.GetRoleByID)
+			roleRoutes.PATCH("/:id", controllers.UpdateRoleByID)
+			roleRoutes.DELETE("/:id", controllers.DeleteRoleByID)
+		}
+
 		// Branch Routes
 		branchRoutes := apiRoutes.Group("/store/branches")
 		{
@@ -119,12 +140,12 @@ func SetupRouter() *gin.Engine {
 
 			loanRoutes := financeRoutes.Group("/loans")
 			{
-				loanRoutes.POST("", financecontroller.CreateTax)
-				loanRoutes.GET("", financecontroller.GetTaxes)
+				loanRoutes.POST("", financecontroller.CreateLoan)
+				loanRoutes.GET("", financecontroller.GetLoans)
 
-				loanRoutes.GET("/:id", financecontroller.GetTaxByID)
-				loanRoutes.PATCH("/:id", financecontroller.UpdateTaxByID)
-				loanRoutes.DELETE("/:id", financecontroller.DeleteTaxByID)
+				loanRoutes.GET("/:id", financecontroller.GetLoanByID)
+				loanRoutes.PATCH("/:id", financecontroller.UpdateLoanByID)
+				loanRoutes.DELETE("/:id", financecontroller.DeleteLoanByID)
 			}
 
 			cashDrawerRoutes := financeRoutes.Group("/cash-drawers")

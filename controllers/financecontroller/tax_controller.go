@@ -92,7 +92,7 @@ func UpdateTaxByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "Tax update successfuly", Tax)
+	helpers.JSONResponse(c, http.StatusOK, "Tax update successfuly", Tax)
 }
 
 func DeleteTaxByID(c *gin.Context) {

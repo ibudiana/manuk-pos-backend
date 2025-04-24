@@ -98,7 +98,7 @@ func UpdateBranchByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "Branch update successfuly", Branch)
+	helpers.JSONResponse(c, http.StatusOK, "Branch update successfuly", Branch)
 }
 
 func DeleteBranchByID(c *gin.Context) {

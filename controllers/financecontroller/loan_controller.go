@@ -92,7 +92,7 @@ func UpdateLoanByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "Loan update successfuly", Loan)
+	helpers.JSONResponse(c, http.StatusOK, "Loan update successfuly", Loan)
 }
 
 func DeleteLoanByID(c *gin.Context) {

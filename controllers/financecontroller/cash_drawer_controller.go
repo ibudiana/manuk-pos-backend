@@ -92,7 +92,7 @@ func UpdateCashDrawerByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "CashDrawer update successfuly", CashDrawer)
+	helpers.JSONResponse(c, http.StatusOK, "CashDrawer update successfuly", CashDrawer)
 }
 
 func DeleteCashDrawerByID(c *gin.Context) {

@@ -98,7 +98,7 @@ func UpdatePurchaseOrderByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "PurchaseOrder update successfuly", PurchaseOrder)
+	helpers.JSONResponse(c, http.StatusOK, "PurchaseOrder update successfuly", PurchaseOrder)
 }
 
 func DeletePurchaseOrderByID(c *gin.Context) {

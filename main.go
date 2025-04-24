@@ -6,6 +6,8 @@ import (
 
 	"manuk-pos-backend/database"
 	"manuk-pos-backend/routes"
+
+	"github.com/gin-contrib/cors"
 	"github.com/joho/godotenv"
 )
 
@@ -26,6 +28,14 @@ func main() {
 
 	// Setup router
 	r := routes.SetupRouter()
+
+	// Middleware CORS
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:8080", "http://127.0.0.1:8080"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
+		AllowCredentials: true,
+	}))
 
 	serverAddr := os.Getenv("SERVER_PORT")
 

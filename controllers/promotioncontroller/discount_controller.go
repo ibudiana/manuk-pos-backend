@@ -98,7 +98,7 @@ func UpdateDiscountByID(c *gin.Context) {
 		return
 	}
 
-	helpers.JSONResponse(c, http.StatusCreated, "Discount update successfuly", Discount)
+	helpers.JSONResponse(c, http.StatusOK, "Discount update successfuly", Discount)
 }
 
 func DeleteDiscountByID(c *gin.Context) {

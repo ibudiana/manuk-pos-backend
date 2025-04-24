@@ -25,7 +25,7 @@ type Loan struct {
 	UpdatedAt time.Time `gorm:"autoUpdateTime" json:"updated_at"`
 
 	// Relasi dengan tabel lain
-	Customer customer.Customer `gorm:"foreignKey:CustomerID" json:"customer"`
+	Customer *customer.Customer `gorm:"foreignKey:CustomerID" json:"customer,omitempty"`
 }
 
 // LoanPayment represents a payment made against a loan
