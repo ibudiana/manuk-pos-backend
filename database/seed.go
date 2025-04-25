@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -14,6 +15,7 @@ import (
 	"manuk-pos-backend/models/store"
 	"manuk-pos-backend/models/user"
 	"manuk-pos-backend/models/vendor"
+
 	"gorm.io/gorm"
 )
 
@@ -33,6 +35,7 @@ func Seed() {
 	SeedPromotions(DB)
 	SeedGoodsReceiving(DB)
 	SeedPurchaseOrders(DB)
+	SeedTransactions(DB)
 }
 
 func SeedRoles(db *gorm.DB) {
@@ -243,36 +246,244 @@ func SeedCustomers(db *gorm.DB) {
 	if count == 0 {
 		customers := []customer.Customer{
 			{
-				Code:           "CUST0001",
-				Name:           "John Doe",
-				Phone:          "081234567890",
-				Email:          "john.doe@example.com",
-				Address:        "Jl. Raya No. 10",
-				City:           "Jakarta",
-				PostalCode:     "12345",
-				Birthdate:      timePtr(time.Date(1990, 5, 15, 0, 0, 0, 0, time.UTC)),
+				Code:           "CUST0003",
+				Name:           "Agus Wijaya",
+				Phone:          "081278912345",
+				Email:          "agus.wijaya@mail.com",
+				Address:        "Jl. Melati No. 22",
+				City:           "Surabaya",
+				PostalCode:     "60231",
+				Birthdate:      timePtr(time.Date(1988, 2, 10, 0, 0, 0, 0, time.UTC)),
 				JoinDate:       time.Now(),
 				CustomerType:   "regular",
-				CreditLimit:    1000000.00,
-				CurrentBalance: 50000.00,
+				CreditLimit:    1500000,
+				CurrentBalance: 120000,
 				IsActive:       true,
-				Notes:          "Regular customer",
+				Notes:          "Sering beli produk elektronik",
 			},
 			{
-				Code:           "CUST0002",
-				Name:           "Jane Smith",
-				Phone:          "082345678901",
-				Email:          "jane.smith@example.com",
-				Address:        "Jl. Merdeka No. 5",
-				City:           "Bandung",
-				PostalCode:     "67890",
-				Birthdate:      timePtr(time.Date(1985, 8, 20, 0, 0, 0, 0, time.UTC)),
+				Code:           "CUST0004",
+				Name:           "Rina Kartika",
+				Phone:          "082298765432",
+				Email:          "rina.kartika@mail.com",
+				Address:        "Jl. Anggrek No. 15",
+				City:           "Yogyakarta",
+				PostalCode:     "55281",
+				Birthdate:      timePtr(time.Date(1993, 7, 12, 0, 0, 0, 0, time.UTC)),
 				JoinDate:       time.Now(),
 				CustomerType:   "premium",
-				CreditLimit:    2000000.00,
-				CurrentBalance: 150000.00,
+				CreditLimit:    2500000,
+				CurrentBalance: 80000,
 				IsActive:       true,
-				Notes:          "Premium customer with higher credit limit",
+				Notes:          "Langganan produk fashion",
+			},
+			{
+				Code:           "CUST0005",
+				Name:           "Dewi Lestari",
+				Phone:          "081345678912",
+				Email:          "dewi.lestari@example.com",
+				Address:        "Jl. Kenanga No. 9",
+				City:           "Semarang",
+				PostalCode:     "50145",
+				Birthdate:      timePtr(time.Date(1991, 11, 23, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "regular",
+				CreditLimit:    1000000,
+				CurrentBalance: 25000,
+				IsActive:       true,
+				Notes:          "Pembelian rutin bulanan",
+			},
+			{
+				Code:           "CUST0006",
+				Name:           "Yusuf Hamzah",
+				Phone:          "085234567899",
+				Email:          "yusuf.hamzah@domain.com",
+				Address:        "Jl. Cempaka No. 3",
+				City:           "Medan",
+				PostalCode:     "20112",
+				Birthdate:      timePtr(time.Date(1980, 9, 5, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "vip",
+				CreditLimit:    5000000,
+				CurrentBalance: 500000,
+				IsActive:       true,
+				Notes:          "VIP, sering order besar",
+			},
+			{
+				Code:           "CUST0007",
+				Name:           "Sari Ningsih",
+				Phone:          "087712345678",
+				Email:          "sari.ningsih@mail.net",
+				Address:        "Jl. Mawar No. 5",
+				City:           "Bogor",
+				PostalCode:     "16111",
+				Birthdate:      timePtr(time.Date(1995, 3, 17, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "regular",
+				CreditLimit:    800000,
+				CurrentBalance: 100000,
+				IsActive:       true,
+				Notes:          "Aktif di marketplace",
+			},
+			{
+				Code:           "CUST0008",
+				Name:           "Tommy Gunawan",
+				Phone:          "083876543210",
+				Email:          "tommy.gunawan@gmail.com",
+				Address:        "Jl. Diponegoro No. 12",
+				City:           "Bandung",
+				PostalCode:     "40123",
+				Birthdate:      timePtr(time.Date(1987, 6, 9, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "premium",
+				CreditLimit:    2000000,
+				CurrentBalance: 180000,
+				IsActive:       true,
+				Notes:          "Pembayaran cepat, loyal",
+			},
+			{
+				Code:           "CUST0009",
+				Name:           "Maria Fransiska",
+				Phone:          "081234567891",
+				Email:          "maria.fransiska@outlook.com",
+				Address:        "Jl. Kartini No. 7",
+				City:           "Solo",
+				PostalCode:     "57100",
+				Birthdate:      timePtr(time.Date(1992, 4, 25, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "regular",
+				CreditLimit:    1100000,
+				CurrentBalance: 50000,
+				IsActive:       true,
+				Notes:          "Pembelian teratur",
+			},
+			{
+				Code:           "CUST0010",
+				Name:           "Budi Santoso",
+				Phone:          "082112345678",
+				Email:          "budi.santoso@mail.com",
+				Address:        "Jl. Sisingamangaraja No. 30",
+				City:           "Makassar",
+				PostalCode:     "90123",
+				Birthdate:      timePtr(time.Date(1989, 10, 3, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "regular",
+				CreditLimit:    1200000,
+				CurrentBalance: 95000,
+				IsActive:       true,
+				Notes:          "Biasa order laptop & aksesoris",
+			},
+			{
+				Code:           "CUST0011",
+				Name:           "Fitri Handayani",
+				Phone:          "085612345678",
+				Email:          "fitri.handayani@domain.co.id",
+				Address:        "Jl. Gajah Mada No. 18",
+				City:           "Malang",
+				PostalCode:     "65145",
+				Birthdate:      timePtr(time.Date(1990, 12, 8, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "regular",
+				CreditLimit:    1000000,
+				CurrentBalance: 50000,
+				IsActive:       true,
+				Notes:          "Fashion & aksesoris pelanggan",
+			},
+			{
+				Code:           "CUST0012",
+				Name:           "Fajar Maulana",
+				Phone:          "081898765432",
+				Email:          "fajar.maulana@domain.com",
+				Address:        "Jl. Hasanuddin No. 21",
+				City:           "Tangerang",
+				PostalCode:     "15111",
+				Birthdate:      timePtr(time.Date(1994, 1, 5, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "vip",
+				CreditLimit:    3500000,
+				CurrentBalance: 300000,
+				IsActive:       true,
+				Notes:          "Sering order dalam jumlah besar",
+			},
+			{
+				Code:           "CUST0013",
+				Name:           "Nadia Safira",
+				Phone:          "081345678934",
+				Email:          "nadia.safira@gmail.com",
+				Address:        "Jl. Soekarno-Hatta No. 9",
+				City:           "Palembang",
+				PostalCode:     "30126",
+				Birthdate:      timePtr(time.Date(1996, 9, 13, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "regular",
+				CreditLimit:    900000,
+				CurrentBalance: 85000,
+				IsActive:       true,
+				Notes:          "Aktif di promo akhir bulan",
+			},
+			{
+				Code:           "CUST0014",
+				Name:           "Rizky Firmansyah",
+				Phone:          "082198765432",
+				Email:          "rizky.firmansyah@protonmail.com",
+				Address:        "Jl. Pemuda No. 14",
+				City:           "Bekasi",
+				PostalCode:     "17113",
+				Birthdate:      timePtr(time.Date(1983, 6, 29, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "premium",
+				CreditLimit:    1800000,
+				CurrentBalance: 200000,
+				IsActive:       true,
+				Notes:          "Pelanggan tetap mingguan",
+			},
+			{
+				Code:           "CUST0015",
+				Name:           "Yuli Andini",
+				Phone:          "084298765432",
+				Email:          "yuli.andini@mail.org",
+				Address:        "Jl. Kalimantan No. 17",
+				City:           "Pontianak",
+				PostalCode:     "78121",
+				Birthdate:      timePtr(time.Date(1997, 12, 30, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "regular",
+				CreditLimit:    800000,
+				CurrentBalance: 100000,
+				IsActive:       true,
+				Notes:          "Baru bergabung, pembeli aktif",
+			},
+			{
+				Code:           "CUST0016",
+				Name:           "Eko Prasetyo",
+				Phone:          "081289765432",
+				Email:          "eko.prasetyo@domain.id",
+				Address:        "Jl. Veteran No. 40",
+				City:           "Denpasar",
+				PostalCode:     "80231",
+				Birthdate:      timePtr(time.Date(1982, 3, 18, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "vip",
+				CreditLimit:    5000000,
+				CurrentBalance: 600000,
+				IsActive:       true,
+				Notes:          "Corporate buyer, bulk orders",
+			},
+			{
+				Code:           "CUST0017",
+				Name:           "Hana Oktaviani",
+				Phone:          "083456789012",
+				Email:          "hana.oktaviani@mail.com",
+				Address:        "Jl. Bunga Raya No. 8",
+				City:           "Balikpapan",
+				PostalCode:     "76123",
+				Birthdate:      timePtr(time.Date(1990, 10, 11, 0, 0, 0, 0, time.UTC)),
+				JoinDate:       time.Now(),
+				CustomerType:   "regular",
+				CreditLimit:    1000000,
+				CurrentBalance: 30000,
+				IsActive:       true,
+				Notes:          "Pembelian via WhatsApp & e-commerce",
 			},
 		}
 
@@ -298,37 +509,59 @@ func SeedSuppliers(db *gorm.DB) {
 		// Seed data Supplier
 		suppliers := []vendor.Supplier{
 			{
-				Code:          "SUP001",
-				Name:          "Supplier A",
-				ContactPerson: "John Doe",
+				Code:          "SUP-TECH01",
+				Name:          "Tech Solutions Indonesia",
+				ContactPerson: "Dimas Arif",
 				Phone:         "081234567890",
-				Email:         "suppliera@example.com",
-				Address:       "Jl. Raya No. 1, Jakarta",
+				Email:         "contact@techsolutions.co.id",
+				Address:       "Jl. Teknologi No. 21, Jakarta Selatan",
 				PaymentTerms:  30,
 				IsActive:      true,
-				Notes:         "Reliable supplier for electronics.",
+				Notes:         "Spesialis distributor produk elektronik dan gadget.",
 			},
 			{
-				Code:          "SUP002",
-				Name:          "Supplier B",
-				ContactPerson: "Jane Smith",
-				Phone:         "082345678901",
-				Email:         "supplierb@example.com",
-				Address:       "Jl. Merdeka No. 2, Bandung",
+				Code:          "SUP-GADG02",
+				Name:          "Gadget Supply Co.",
+				ContactPerson: "Siti Rahmawati",
+				Phone:         "082234567891",
+				Email:         "sales@gadgetsupply.co.id",
+				Address:       "Jl. Kemang Timur No. 88, Jakarta Selatan",
 				PaymentTerms:  45,
 				IsActive:      true,
-				Notes:         "Supplier for office supplies.",
+				Notes:         "Supplier utama untuk aksesoris HP dan perangkat pintar.",
 			},
 			{
-				Code:          "SUP003",
-				Name:          "Supplier C",
-				ContactPerson: "Michael Johnson",
-				Phone:         "083456789012",
-				Email:         "supplierc@example.com",
-				Address:       "Jl. Pahlawan No. 3, Surabaya",
+				Code:          "SUP-COMP03",
+				Name:          "CompuTech Nusantara",
+				ContactPerson: "Andi Prasetyo",
+				Phone:         "083334567892",
+				Email:         "admin@computech.id",
+				Address:       "Jl. Diponegoro No. 56, Bandung",
+				PaymentTerms:  30,
+				IsActive:      true,
+				Notes:         "Distributor resmi laptop dan aksesoris komputer.",
+			},
+			{
+				Code:          "SUP-FASH04",
+				Name:          "Urban Style Apparel",
+				ContactPerson: "Linda Anggraini",
+				Phone:         "084434567893",
+				Email:         "support@urbanstyle.id",
+				Address:       "Jl. Sudirman No. 12, Yogyakarta",
 				PaymentTerms:  60,
 				IsActive:      true,
-				Notes:         "Supplier for furniture products.",
+				Notes:         "Penyedia utama pakaian pria dan fashion kasual.",
+			},
+			{
+				Code:          "SUP-HOME05",
+				Name:          "Home & Living Essentials",
+				ContactPerson: "Rudi Hartono",
+				Phone:         "085534567894",
+				Email:         "cs@homeessentials.co.id",
+				Address:       "Jl. A. Yani No. 8, Surabaya",
+				PaymentTerms:  45,
+				IsActive:      true,
+				Notes:         "Memasok peralatan rumah tangga dan elektronik rumah.",
 			},
 		}
 
@@ -352,38 +585,38 @@ func SeedProductsAndSuppliers(db *gorm.DB) {
 	if productCount == 0 {
 		// Seed data Product
 		products := []inventory.Product{
-			{
-				CategoryID:     1, // Asumsikan ada kategori dengan ID 1
-				SKU:            "SKU0001",
-				Barcode:        "123456789012",
-				Name:           "Product A",
-				Description:    "Description of Product A",
-				BuyingPrice:    100.00,
-				SellingPrice:   150.00,
-				MinStock:       5,
-				IsService:      false,
-				IsActive:       true,
-				IsFeatured:     false,
-				AllowFractions: 0,
-				ImageURL:       "http://example.com/productA.jpg",
-				Tags:           "tag1,tag2",
-			},
-			{
-				CategoryID:     2, // Asumsikan ada kategori dengan ID 1
-				SKU:            "SKU0002",
-				Barcode:        "987654321098",
-				Name:           "Product B",
-				Description:    "Description of Product B",
-				BuyingPrice:    50.00,
-				SellingPrice:   75.00,
-				MinStock:       3,
-				IsService:      false,
-				IsActive:       true,
-				IsFeatured:     true,
-				AllowFractions: 0,
-				ImageURL:       "http://example.com/productB.jpg",
-				Tags:           "tag3,tag4",
-			},
+			// Phones (CategoryID: 2)
+			{CategoryID: 2, SKU: "PHN001", Barcode: "100000000001", Name: "Smartphone Nova X", Description: "Smartphone layar 6.5 inch dengan kamera 64MP dan baterai tahan lama.", BuyingPrice: 2500000, SellingPrice: 3250000, MinStock: 5, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "smartphone,android,novax"},
+			{CategoryID: 2, SKU: "PHN002", Barcode: "100000000002", Name: "Charger FastCharge 25W", Description: "Charger USB Type-C dengan fitur fast charging 25W.", BuyingPrice: 120000, SellingPrice: 185000, MinStock: 10, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "charger,accessories,usb"},
+			{CategoryID: 2, SKU: "PHN003", Barcode: "100000000003", Name: "Earphone Bluetooth AirSound", Description: "Earphone wireless dengan suara jernih dan koneksi stabil.", BuyingPrice: 275000, SellingPrice: 389000, MinStock: 6, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "earphone,bluetooth,audio"},
+			{CategoryID: 2, SKU: "PHN004", Barcode: "100000000004", Name: "Phone Holder Universal", Description: "Holder smartphone serbaguna untuk kendaraan dan meja kerja.", BuyingPrice: 50000, SellingPrice: 89000, MinStock: 8, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "aksesoris,holder,smartphone"},
+			{CategoryID: 2, SKU: "PHN005", Barcode: "100000000005", Name: "Tempered Glass Anti Gores", Description: "Pelindung layar tempered glass anti gores untuk berbagai model HP.", BuyingPrice: 30000, SellingPrice: 60000, MinStock: 12, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "pelindung layar,tempered glass,smartphone"},
+
+			// Laptops (CategoryID: 3)
+			{CategoryID: 3, SKU: "LPT001", Barcode: "200000000001", Name: "Laptop Ultrabook AirLite 14", Description: "Laptop tipis ringan dengan prosesor i5, RAM 8GB, SSD 512GB.", BuyingPrice: 6500000, SellingPrice: 7590000, MinStock: 3, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "laptop,ultrabook,ssd"},
+			{CategoryID: 3, SKU: "LPT002", Barcode: "200000000002", Name: "Mouse Wireless ProClick", Description: "Mouse nirkabel ergonomis dengan sensitivitas tinggi.", BuyingPrice: 90000, SellingPrice: 135000, MinStock: 10, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "mouse,wireless,komputer"},
+			{CategoryID: 3, SKU: "LPT003", Barcode: "200000000003", Name: "Laptop Cooling Pad", Description: "Cooling pad dengan kipas ganda untuk menjaga suhu laptop tetap dingin.", BuyingPrice: 70000, SellingPrice: 110000, MinStock: 5, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "cooling pad,aksesori laptop"},
+			{CategoryID: 3, SKU: "LPT004", Barcode: "200000000004", Name: "Backpack Laptop UrbanGear", Description: "Tas laptop stylish dengan pelindung air dan ruang penyimpanan luas.", BuyingPrice: 180000, SellingPrice: 275000, MinStock: 4, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "tas laptop,backpack,gear"},
+			{CategoryID: 3, SKU: "LPT005", Barcode: "200000000005", Name: "Keyboard Bluetooth Foldable", Description: "Keyboard lipat Bluetooth untuk mobilitas tinggi dan kerja remote.", BuyingPrice: 220000, SellingPrice: 299000, MinStock: 3, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "keyboard,bluetooth,portable"},
+
+			// Men's Clothing (CategoryID: 5)
+			{CategoryID: 5, SKU: "MNC001", Barcode: "300000000001", Name: "Kemeja Casual Slim Fit", Description: "Kemeja pria bahan katun dengan potongan slim fit, cocok untuk casual & semi formal.", BuyingPrice: 125000, SellingPrice: 189000, MinStock: 7, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "kemeja,pria,fashion"},
+			{CategoryID: 5, SKU: "MNC002", Barcode: "300000000002", Name: "Kaos Polos Premium", Description: "Kaos polos pria bahan combed 30s yang adem dan nyaman dipakai sehari-hari.", BuyingPrice: 75000, SellingPrice: 120000, MinStock: 10, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "kaos,pria,pakaian"},
+			{CategoryID: 5, SKU: "MNC003", Barcode: "300000000003", Name: "Celana Chino Stretch", Description: "Celana chino slim fit dengan bahan stretch nyaman untuk aktivitas harian.", BuyingPrice: 170000, SellingPrice: 250000, MinStock: 6, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "celana,chino,pria"},
+			{CategoryID: 5, SKU: "MNC004", Barcode: "300000000004", Name: "Jaket Parasut Hoodie", Description: "Jaket pria bahan parasut anti angin dan air, dilengkapi hoodie dan saku.", BuyingPrice: 220000, SellingPrice: 345000, MinStock: 4, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "jaket,pria,outdoor"},
+			{CategoryID: 5, SKU: "MNC005", Barcode: "300000000005", Name: "Sabuk Kulit Pria Classic", Description: "Sabuk kulit asli dengan gesper besi, model klasik untuk formal dan casual.", BuyingPrice: 95000, SellingPrice: 145000, MinStock: 5, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "aksesoris,sabuk,pria"},
+
+			// Electronics (Kategori umum) (CategoryID: 1)
+			{CategoryID: 1, SKU: "ELEC001", Barcode: "400000000001", Name: "Smart TV 42 Inch 4K UHD", Description: "Smart TV 42 inci dengan resolusi 4K dan fitur YouTube, Netflix built-in.", BuyingPrice: 3400000, SellingPrice: 4250000, MinStock: 2, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "tv,4k,smart"},
+			{CategoryID: 1, SKU: "ELEC002", Barcode: "400000000002", Name: "Camera CCTV Wireless 360", Description: "Kamera CCTV nirkabel dengan fitur rotasi 360° dan night vision.", BuyingPrice: 320000, SellingPrice: 450000, MinStock: 3, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "cctv,security,camera"},
+			{CategoryID: 1, SKU: "ELEC003", Barcode: "400000000003", Name: "Smart Home Plug WiFi", Description: "Colokan listrik pintar yang bisa dikontrol lewat aplikasi smartphone.", BuyingPrice: 150000, SellingPrice: 225000, MinStock: 4, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "smartplug,rumah pintar,elektronik"},
+			{CategoryID: 1, SKU: "ELEC004", Barcode: "400000000004", Name: "Lampu LED Sensor Gerak", Description: "Lampu LED hemat energi dengan sensor gerak otomatis.", BuyingPrice: 50000, SellingPrice: 85000, MinStock: 6, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "lampu,led,otomatis"},
+			{CategoryID: 1, SKU: "ELEC005", Barcode: "400000000005", Name: "Smart Air Purifier X2", Description: "Air purifier dengan filter HEPA dan kontrol via aplikasi.", BuyingPrice: 870000, SellingPrice: 999000, MinStock: 3, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "air purifier,smart,hepa"},
+
+			// Fashion umum (CategoryID: 4)
+			{CategoryID: 4, SKU: "FSH001", Barcode: "500000000001", Name: "Topi Baseball Unisex", Description: "Topi kasual model baseball cocok untuk pria dan wanita.", BuyingPrice: 45000, SellingPrice: 80000, MinStock: 5, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "topi,aksesoris,unisex"},
+			{CategoryID: 4, SKU: "FSH002", Barcode: "500000000002", Name: "Sandal Slide Sporty", Description: "Sandal model slide dengan bahan nyaman dan anti slip.", BuyingPrice: 60000, SellingPrice: 95000, MinStock: 7, IsService: false, IsActive: true, IsFeatured: false, AllowFractions: 0, ImageURL: "", Tags: "sandal,fashion,kasual"},
+			{CategoryID: 4, SKU: "FSH003", Barcode: "500000000003", Name: "Jas Hujan Stylish", Description: "Jas hujan pria/wanita model trendy dengan bahan waterproof.", BuyingPrice: 85000, SellingPrice: 135000, MinStock: 6, IsService: false, IsActive: true, IsFeatured: true, AllowFractions: 0, ImageURL: "", Tags: "jas hujan,aksesori,outdoor"},
 		}
 
 		for _, product := range products {
@@ -395,24 +628,36 @@ func SeedProductsAndSuppliers(db *gorm.DB) {
 
 		// Seed data ProductSupplier
 		productSuppliers := []inventory.ProductSupplier{
-			{
-				ProductID:            1, // Asumsikan ProductID 1 sudah ada
-				SupplierID:           1, // Asumsikan SupplierID 1 sudah ada
-				BuyingPrice:          float64Ptr(95.00),
-				LeadTime:             intPtr(7),
-				MinimumOrderQuantity: 10,
-				IsPrimary:            true,
-				LastSupplyDate:       timePtr(time.Now().AddDate(0, -1, 0)), // 1 bulan lalu
-			},
-			{
-				ProductID:            2, // Asumsikan ProductID 2 sudah ada
-				SupplierID:           2, // Asumsikan SupplierID 2 sudah ada
-				BuyingPrice:          float64Ptr(45.00),
-				LeadTime:             intPtr(10),
-				MinimumOrderQuantity: 20,
-				IsPrimary:            false,
-				LastSupplyDate:       timePtr(time.Now().AddDate(0, -2, 0)), // 2 bulan lalu
-			},
+			{ProductID: 3, SupplierID: 1, BuyingPrice: float64Ptr(250000), LeadTime: intPtr(7), MinimumOrderQuantity: 10, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -3))},
+			{ProductID: 4, SupplierID: 1, BuyingPrice: float64Ptr(120000), LeadTime: intPtr(5), MinimumOrderQuantity: 15, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, -1))},
+			{ProductID: 5, SupplierID: 1, BuyingPrice: float64Ptr(275000), LeadTime: intPtr(6), MinimumOrderQuantity: 8, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -10))},
+			{ProductID: 6, SupplierID: 2, BuyingPrice: float64Ptr(50000), LeadTime: intPtr(3), MinimumOrderQuantity: 20, IsPrimary: false, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, -4))},
+			{ProductID: 7, SupplierID: 2, BuyingPrice: float64Ptr(30000), LeadTime: intPtr(4), MinimumOrderQuantity: 30, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, 0))},
+
+			{ProductID: 8, SupplierID: 3, BuyingPrice: float64Ptr(6500000), LeadTime: intPtr(10), MinimumOrderQuantity: 5, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -3, 0))},
+			{ProductID: 9, SupplierID: 3, BuyingPrice: float64Ptr(90000), LeadTime: intPtr(2), MinimumOrderQuantity: 25, IsPrimary: false, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -12))},
+			{ProductID: 10, SupplierID: 3, BuyingPrice: float64Ptr(70000), LeadTime: intPtr(4), MinimumOrderQuantity: 12, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, -8))},
+			{ProductID: 11, SupplierID: 3, BuyingPrice: float64Ptr(180000), LeadTime: intPtr(6), MinimumOrderQuantity: 10, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, -2))},
+			{ProductID: 12, SupplierID: 3, BuyingPrice: float64Ptr(220000), LeadTime: intPtr(5), MinimumOrderQuantity: 10, IsPrimary: false, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -5))},
+
+			{ProductID: 13, SupplierID: 4, BuyingPrice: float64Ptr(125000), LeadTime: intPtr(4), MinimumOrderQuantity: 15, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -7))},
+			{ProductID: 14, SupplierID: 4, BuyingPrice: float64Ptr(75000), LeadTime: intPtr(2), MinimumOrderQuantity: 20, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, -6))},
+			{ProductID: 15, SupplierID: 4, BuyingPrice: float64Ptr(170000), LeadTime: intPtr(7), MinimumOrderQuantity: 8, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, -9))},
+			{ProductID: 16, SupplierID: 4, BuyingPrice: float64Ptr(220000), LeadTime: intPtr(10), MinimumOrderQuantity: 5, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -11))},
+			{ProductID: 17, SupplierID: 4, BuyingPrice: float64Ptr(95000), LeadTime: intPtr(3), MinimumOrderQuantity: 12, IsPrimary: false, LastSupplyDate: timePtr(time.Now().AddDate(0, -3, -1))},
+
+			{ProductID: 18, SupplierID: 5, BuyingPrice: float64Ptr(3400000), LeadTime: intPtr(9), MinimumOrderQuantity: 2, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, -10))},
+			{ProductID: 19, SupplierID: 5, BuyingPrice: float64Ptr(320000), LeadTime: intPtr(5), MinimumOrderQuantity: 4, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, 0))},
+			{ProductID: 20, SupplierID: 5, BuyingPrice: float64Ptr(150000), LeadTime: intPtr(4), MinimumOrderQuantity: 6, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -15))},
+			{ProductID: 21, SupplierID: 5, BuyingPrice: float64Ptr(50000), LeadTime: intPtr(3), MinimumOrderQuantity: 15, IsPrimary: false, LastSupplyDate: timePtr(time.Now().AddDate(0, -3, -5))},
+			{ProductID: 22, SupplierID: 5, BuyingPrice: float64Ptr(870000), LeadTime: intPtr(7), MinimumOrderQuantity: 4, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -3))},
+
+			// Fashion umum
+			{ProductID: 23, SupplierID: 1, BuyingPrice: float64Ptr(45000), LeadTime: intPtr(2), MinimumOrderQuantity: 10, IsPrimary: false, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -6))},
+			{ProductID: 24, SupplierID: 2, BuyingPrice: float64Ptr(60000), LeadTime: intPtr(5), MinimumOrderQuantity: 8, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, -7))},
+			{ProductID: 25, SupplierID: 2, BuyingPrice: float64Ptr(85000), LeadTime: intPtr(6), MinimumOrderQuantity: 6, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -3, 0))},
+			{ProductID: 1, SupplierID: 3, BuyingPrice: float64Ptr(130000), LeadTime: intPtr(5), MinimumOrderQuantity: 4, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -2, -15))},
+			{ProductID: 2, SupplierID: 4, BuyingPrice: float64Ptr(115000), LeadTime: intPtr(6), MinimumOrderQuantity: 6, IsPrimary: true, LastSupplyDate: timePtr(time.Now().AddDate(0, -1, -20))},
 		}
 
 		for _, ps := range productSuppliers {
@@ -899,6 +1144,92 @@ func SeedPurchaseOrders(db *gorm.DB) {
 	}
 
 	log.Println("Data PurchaseOrder dan PurchaseOrderItem berhasil di-seed.")
+}
+
+func SeedTransactions(db *gorm.DB) {
+	var transactionCount int64
+	db.Model(&orders.Transaction{}).Count(&transactionCount)
+
+	if transactionCount == 0 {
+		// Asumsi 10 customer pertama punya ID 1 - 10
+		for i := 1; i <= 10; i++ {
+			invoiceNum := "INV-20240425-00" + fmt.Sprint(i)
+			transaction := orders.Transaction{
+				CustomerID:       i,
+				UserID:           1, // Asumsi user id 1 exist
+				BranchID:         1, // Asumsi branch id 1 exist
+				DiscountID:       1,
+				TaxID:            1,
+				FeeID:            1,
+				InvoiceNumber:    invoiceNum,
+				InvoiceDate:      time.Now(),
+				TransactionDate:  time.Now(),
+				DueDate:          time.Now().AddDate(0, 0, 7).Format("2006-01-02"),
+				Subtotal:         300000,
+				DiscountAmount:   15000,
+				TaxAmount:        15000,
+				FeeAmount:        5000,
+				ShippingCost:     10000,
+				GrandTotal:       315000,
+				AmountPaid:       320000,
+				AmountReturned:   5000,
+				PaymentStatus:    "paid",
+				PointsEarned:     30,
+				PointsUsed:       0,
+				Notes:            "Transaksi seed pelanggan ke-" + fmt.Sprint(i),
+				Status:           "completed",
+				ReferenceID:      1,
+				ShippingAddress:  "Alamat kirim customer " + fmt.Sprint(i),
+				ShippingTracking: "TRK2024" + fmt.Sprint(1000+i),
+				SyncStatus:       "synced",
+			}
+
+			if err := db.Create(&transaction).Error; err != nil {
+				log.Fatalf("Gagal menyimpan transaksi %d: %v", i, err)
+			}
+
+			items := []orders.TransactionItem{
+				{
+					TransactionID:   transaction.ID,
+					ProductID:       1,
+					Quantity:        2,
+					UnitPrice:       100000,
+					OriginalPrice:   110000,
+					DiscountPercent: 5,
+					DiscountAmount:  10000,
+					TaxPercent:      5,
+					TaxAmount:       10000,
+					Subtotal:        190000,
+					Notes:           "Barang A",
+					SyncStatus:      "synced",
+				},
+				{
+					TransactionID:   transaction.ID,
+					ProductID:       2,
+					Quantity:        1,
+					UnitPrice:       100000,
+					OriginalPrice:   100000,
+					DiscountPercent: 5,
+					DiscountAmount:  5000,
+					TaxPercent:      5,
+					TaxAmount:       5000,
+					Subtotal:        95000,
+					Notes:           "Barang B",
+					SyncStatus:      "synced",
+				},
+			}
+
+			for _, item := range items {
+				if err := db.Create(&item).Error; err != nil {
+					log.Fatalf("Gagal menyimpan item transaksi %d: %v", i, err)
+				}
+			}
+		}
+
+		log.Println("10 transaksi berhasil di-seed!")
+	} else {
+		log.Println("Data transaksi sudah ada, tidak perlu di-seed.")
+	}
 }
 
 // Helper function to create pointer of time for birthdate field
