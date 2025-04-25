@@ -58,3 +58,6 @@ go run main.go
 ## Authentication
 
 Authorization: Bearer <token>
+
+## PostMan Link
+https://documenter.getpostman.com/view/37267696/2sB2ca8L6X 
